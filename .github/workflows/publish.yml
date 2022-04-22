@@ -40,7 +40,7 @@ jobs:
 
       - name: Create configuration files
         if: github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true'
-        run: runner "echo  '(setq WORK_ENV nil)' > ~/.doom.d/work.el && echo '(setq HEADLESS t)' > ~/.doom.d/headless.el"
+        run: runner "echo  '(setq WORK_ENV nil)' > ~/.doom.d/work.el && echo '(setq HEADLESS t)' > ~/.doom.d/headless.el && echo '' > ~/.doom.d/modules/org-ql-queries.el "
 
       - name: Setup Doom
         if: github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true'
