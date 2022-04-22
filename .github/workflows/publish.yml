@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-20.04 # change to -latest when possible
     environment: github-pages
     container:
-      image: ghcr.io/lytex/emacs-config:latest
+      image: ghcr.io/lytex/doom.d:latest
       options: --user 0 # root
       credentials:
         username: ${{ github.actor }}
