@@ -16,7 +16,7 @@ jobs:
       options: --user 0 # root
       credentials:
         username: ${{ github.actor }}
-        password: ${{ secrets.GHCR_TOKEN }}
+        password: ${{ github-pages.GHCR_TOKEN }}
 
     steps:
       - name: Clone Doom to ~/.emacs.d
