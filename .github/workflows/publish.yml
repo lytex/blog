@@ -40,7 +40,7 @@ jobs:
 
       - name: Create configuration files
         if: github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true'
-        run: runner "echo  '(setq WORK_ENV nil)' > '~/.config/doom/work.el'"
+        run: runner "echo  '(setq WORK_ENV nil)' > ~/.config/doom/work.el"
 
       - name: Setup Doom
         if: github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true'
