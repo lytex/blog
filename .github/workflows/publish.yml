@@ -43,14 +43,14 @@ jobs:
       - name: Setup Doom
         run: runner '~/.emacs.d/bin/doom install --no-env --no-fonts'
 
-      - uses: actions/checkout@v3
-      - run: ls -Al
+      - name: Clone blog repo
+        run: runner 'git clone --depth 1 https://github.com/lytex/blog.git ~/org && cd org && ~/.doom.d/export.sh'
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: /home/runner/.config/doom/publish
+          publish_dir: /home/runner/org
           force_orphan: true
 
       # - name: Debug over SSH (tmate)
