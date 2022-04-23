@@ -48,7 +48,7 @@ jobs:
 
       - name: Export config
         if: github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true'
-        run: runner 'cd ${{ steps.doom-version.outputs.oldpwd }} && ~/.doom.d/export.sh'
+        run: runner 'cd ${{ steps.doom-version.outputs.oldpwd }} mkdir org && cp *.org org/ && cd org/ && ~/.doom.d/export.sh'
 
       - name: Deploy
         if: github.event_name != 'pull_request' && ( github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true')
