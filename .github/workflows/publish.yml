@@ -46,7 +46,7 @@ jobs:
         if: github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true'
         run: runner '~/.emacs.d/bin/doom install --no-env --no-fonts'
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Export config
         if: github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true'
         run: runner 'cd $GITHUB_WORKSPACE && ls -Al'
