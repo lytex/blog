@@ -44,7 +44,6 @@ jobs:
         run: runner '~/.emacs.d/bin/doom install --no-env --no-fonts'
 
       - uses: actions/checkout@v3
-      - name: checkout repository
       - run: ls -Al
 
       - name: Deploy
