@@ -5,8 +5,8 @@ on:
   pull_request:
   push:
     branches: master
-  schedule:
-    - cron: '0 */2 * * *' # every 2h
+  # schedule:
+  #   - cron: '0 */2 * * *' # every 2h
 
 jobs:
   deploy:
@@ -35,23 +35,18 @@ jobs:
           key: ${{ runner.os }}-doom@${{ steps.doom-version.outputs.hash }}
 
       - name: Checkout config
-        if: github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true'
         run: runner 'git clone --depth 1 --recurse-submodules https://github.com/lytex/doom.d.git ~/.doom.d'
 
       - name: Create configuration files
-        if: github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true'
         run: runner "echo  '(setq WORK_ENV nil)' > ~/.doom.d/work.el && echo '(setq HEADLESS t)' > ~/.doom.d/headless.el && echo '' > ~/.doom.d/modules/org-ql-queries.el "
 
       - name: Setup Doom
-        if: github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true'
         run: runner '~/.emacs.d/bin/doom install --no-env --no-fonts'
 
       - uses: actions/checkout@v3
-        if: github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true'
-        run: runner 'cd $GITHUB_WORKSPACE && ls -Al'
+      - run: runner 'cd $GITHUB_WORKSPACE && ls -Al'
 
       - name: Deploy
-        if: github.event_name != 'pull_request' && ( github.event_name != 'schedule' || steps.doomcache.outputs.cache-hit != 'true')
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
